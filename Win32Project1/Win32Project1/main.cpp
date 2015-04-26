@@ -114,20 +114,20 @@ int main(int argc, char* args[])
 		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
 		if (currentKeyStates[SDL_SCANCODE_UP])
 		{
-			p1y -= PADDLE_SPEED * deltaTime;
+			p2y -= PADDLE_SPEED * deltaTime;
 		}
 		else if (currentKeyStates[SDL_SCANCODE_DOWN])
 		{
-			p1y += PADDLE_SPEED * deltaTime;
+			p2y += PADDLE_SPEED * deltaTime;
 		}
 
 		if (currentKeyStates[SDL_SCANCODE_W])
 		{
-			p2y -= PADDLE_SPEED * deltaTime;
+			p1y -= PADDLE_SPEED * deltaTime;
 		}
 		else if (currentKeyStates[SDL_SCANCODE_S])
 		{
-			p2y += PADDLE_SPEED * deltaTime;
+			p1y += PADDLE_SPEED * deltaTime;
 		}
 
 		if (p1y > SCREEN_HEIGHT-PADDLE_HEIGHT)
@@ -183,17 +183,13 @@ int main(int argc, char* args[])
 			by = (SCREEN_HEIGHT / 2.0f) - (BALL_HEIGHT/ 2.0f);
 		}
 		
-		if (bx > SCREEN_WIDTH - BALL_WIDTH - PADDLE_WIDTH)
-		{
-			bx = SCREEN_WIDTH - BALL_WIDTH - PADDLE_WIDTH;
-			kierunek.x = -kierunek.x;
-		}
+	
 
 		
 
-		if (by + BALL_HEIGHT > p1y)
+		if (by + BALL_HEIGHT > p1y )
 		{
-			if (by < p1y + PADDLE_HEIGHT)
+			if (by < p1y + PADDLE_HEIGHT )
 			{
 				if (bx < 0 + PADDLE_WIDTH)
 				{
@@ -202,6 +198,20 @@ int main(int argc, char* args[])
 				}
 			}
 		}
+
+
+		if (by + BALL_HEIGHT > p2y)
+		{
+			if (by < p2y + PADDLE_HEIGHT)
+			{
+				if (bx > SCREEN_WIDTH - PADDLE_WIDTH- BALL_WIDTH)
+				{
+					bx = SCREEN_WIDTH - PADDLE_WIDTH- BALL_WIDTH;
+					kierunek.x = -kierunek.x;
+				}
+			}
+		}
+
 
 
 
